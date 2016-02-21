@@ -28,7 +28,7 @@ angular
       })
       .when('/inscription', {
         templateUrl: 'views/inscription.html',
-        controller: 'inscriptionControler',
+        controller: 'inscriptionController',
         controllerAs: 'inscription'
       })
       .otherwise({
