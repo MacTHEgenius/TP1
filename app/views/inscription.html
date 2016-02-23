@@ -4,44 +4,44 @@
 
 
 	Prénom :<br>
-	<input name="firstnameInput" ng-model="firstName" required ng-blur="firstnameBlur()" type="text"/>
+	<input class="form-control" name="firstnameInput" ng-model="firstName" required ng-blur="firstnameBlur()" type="text"/>
 		<span ng-show="inscriptionForm.firstnameInput.$touched && inscriptionForm.firstnameInput.$error.required" style="color:red">Le prénom est requis.</span>
 		<span ng-show="!inscriptionForm.firstnameInput.$error.required && inscriptionForm.firstnameInput.$error.firstnameValidator" style="color:red">Le prénom doit être valide.</span>
 <br><br>
 
 
 	Nom :<br>
-	<input name="nameInput" ng-model="nameM" required ng-blur="nameBlur()" type="text"/>
+	<input class="form-control" name="nameInput" ng-model="nameM" required ng-blur="nameBlur()" type="text"/>
 		<span ng-show="inscriptionForm.nameInput.$touched && inscriptionForm.nameInput.$error.required" style="color:red">Le nom est requis.</span>
 		<span ng-show="!inscriptionForm.nameInput.$error.required && inscriptionForm.nameInput.$error.nameValidator" style="color:red">Le nom doit être valide.</span>
 <br><br>
 
 
 	Addresse courriel :<br>
-	<input type="email" name="emailInput" ng-model="emailM" required>
+	<input class="form-control" type="email" name="emailInput" ng-model="emailM" required>
 		<span ng-show="inscriptionForm.emailInput.$touched && inscriptionForm.emailInput.$error.required" style="color:red">L'addresse couriel est requise.</span>
 		<span ng-show="inscriptionForm.emailInput.$touched && inscriptionForm.emailInput.$error.email" style="color:red">L'addresse couriel doit être valide.</span>
 <br><br>
 
 
 	Mot de passe :<br>
-	<input name="passwordInput" ng-model="passwordM" type="password" required ng-blur="passwordBlur()"/>
+	<input class="form-control" name="passwordInput" ng-model="passwordM" type="password" required ng-blur="passwordBlur()"/>
 		<span ng-show="inscriptionForm.passwordInput.$touched && inscriptionForm.passwordInput.$error.required" style="color:red">Le mot de passe est requis.</span>
 <br><br>
 
 
 	Confirmation du mot de passe :<br>
-	<input name="confirmPasswordInput" ng-model="confirmPasswordM" type="password" required ng-blur="confirmPasswordBlur()"/>
+	<input class="form-control" name="confirmPasswordInput" ng-model="confirmPasswordM" type="password" required ng-blur="confirmPasswordBlur()"/>
 		<span ng-show="inscriptionForm.confirmPasswordInput.$touched && inscriptionForm.confirmPasswordInput.$error.required" style="color:red">La confirmation du mot de passe est requise.</span>
 		<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && inscriptionForm.confirmPasswordInput.$error.isNotSame" style="color:red">Le mot de passe n'est pas semblable.</span>
 		<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && inscriptionForm.confirmPasswordInput.$error.isSame" style="color:green">Confirmé.</span>
 <br><br>
 
 
-	<input type="button" value="Confirmer" ng-click="submit()"/>
+	<input class="btn btn-default" type="button" value="Confirmer" ng-click="submit()"/>
 		<span ng-show="showSubmitError" style="color:red">Le formulaire n'est pas valide!</span>
 		
-		
+<br><br>		
 </form>
 <div ng-show="!showForm">
 <h4>Nom :</h4>
