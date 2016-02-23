@@ -69,7 +69,7 @@ myApp.controller('inscriptionController', function ($scope) {
 		$scope.inscriptionForm.confirmPasswordInput.$invalid)
 		{
 			$scope.showSubmitError=true;
-			$scope.firstNameBlur();
+			$scope.firstnameBlur();
 			$scope.nameBlur();
 			$scope.inscriptionForm.emailInput.$touched=true;
 			$scope.passwordBlur();
