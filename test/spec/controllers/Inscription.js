@@ -19,6 +19,5 @@ describe('Controller: inscriptionController', function () {
 
   it('should initialize default show values', function () {
     expect(scope.showForm).toBe(true);
-    expect(scope.showSubmitError).toBe(false);
   });
 });
