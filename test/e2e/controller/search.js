@@ -1,4 +1,4 @@
-describe("inscription tests", function(){
+describe("search tests", function(){
 	beforeEach(function(){
 		browser.get("#/search");
 	});

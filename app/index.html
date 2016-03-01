@@ -16,7 +16,6 @@
     <!-- endbuild -->
   </head>
   <body ng-app="tp1App">
-  <div ng-controller="indexController">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -41,8 +40,9 @@
 
             <ul class="nav navbar-nav">
               <li><a href="#/">Accueil</a></li>
+              <li><a ng-href="#/newMovies">Nouveautés</a></li>
               <li><a ng-href="#/search">Recherche</a></li>
-              <li><a id="idInscription" ng-href="#/inscription">Inscription</a></li>
+              <li><a ng-href="#/inscription">Inscription</a></li>
               <li><a ng-href="#/contact">Contact</a></li>
             </ul>
           </div>
@@ -81,8 +81,7 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/inscription.js"></script>
         <script src="scripts/controllers/search.js"></script>
-        <script src="scripts/controllers/index.js"></script>
+        <script src="scripts/controllers/newMovies.js"></script>
         <!-- endbuild -->
-</div>
 </body>
 </html>

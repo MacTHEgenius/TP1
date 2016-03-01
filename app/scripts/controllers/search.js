@@ -29,7 +29,7 @@ myApp.controller('searchController', function ($scope, $http) {
 		{
 			$scope.showEmptyError=false;
 		}
-		$http.get('http://omdbapi.com/', {params : {s : $scope.searchM}, timeout : 500}).then(
+		$http.get('http://omdbapi.com/', {params : {s : $scope.searchM}, timeout : 2000}).then(
    		function successCallback(response) {
    			if(response.data.Response=="False")
    			{

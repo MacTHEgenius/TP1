@@ -35,6 +35,11 @@ app.config(function ($routeProvider) {
         controller: 'searchController',
         controllerAs: 'search'
       })
+      .when('/newMovies', {
+        templateUrl: 'views/newMovies.html',
+        controller: 'newMoviesController',
+        controllerAs: 'newMovies'
+      })
       .otherwise({
         redirectTo: '/'
       });
