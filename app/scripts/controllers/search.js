@@ -15,7 +15,7 @@ myApp.controller('searchController', function ($scope, $http) {
 	$scope.totalResults=0;
 	$scope.datas=[];
 	$scope.submit=function(){
-		if($scope.searchM==undefined)$scope.searchM="";
+		if($scope.searchM==undefined){$scope.searchM="";}
 		if($scope.searchM=="")
 		{
 			$scope.showEmptyError=true;
@@ -32,7 +32,7 @@ myApp.controller('searchController', function ($scope, $http) {
    			$scope.showMovies=true;
    			$scope.totalResults=response.data.totalResults;
    			$scope.datas=response.data.Search;
-		}, function errorCallback(response) {
+		}, function errorCallback() {
      		$scope.showServerError=true;
      		$scope.showMovies=false;
 		});
