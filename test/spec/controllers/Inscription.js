@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: inscriptionController', function () {
 
   // load the controller's module
   beforeEach(module('tp1App'));
 
-  var MainCtrl,
+  var inscriptionController,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    inscriptionController = $controller('inscriptionController', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
-  it('Sample Test', function () {
-    expect(true).toBe(true);
+  it('should initialize default show values', function () {
+    expect(scope.showForm).toBe(true);
   });
 });

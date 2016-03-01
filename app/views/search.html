@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="../styles/search.css">
+<div ng-controller="searchController">
+
+<form class="form-group">
+<p>Recherche :</p>
+<input class="form-control" ng-model="searchM" placeholder="Titre..."/>
+<span id="emptyErrorId" ng-show="showEmptyError" style="color:red">Vous devez entrer au moins deux lettre.</span>
+<br>
+<br>
+<button id="submitButtonId" class="btn btn-default" ng-click="submit()">Rechercher</button>
+</form>
+<br>
+<br>
+<span id="serverErrorId" ng-show="showServerError" style="color:red">Une erreur est survenue pendant l'appel du serveur.</span>
+<span id="noResultErrorId" ng-show="showNoResultError" style="color:red">Aucun résultat pour la requête spécifiée.</span>
+<div ng-show="showMovies">
+<p>Nombre de films : {{totalResults}}</p>
+<ul>
+	<li ng-repeat="data in datas">
+		<h3>{{data.Title}}</h5>
+		<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
+		<span ng-show="data.Poster=='N/A'"><p>Pas de Poster</p></span>
+		<p>{{data.Year}}</p>
+		<hr>
+	</li>
+</ul>
+</div>
+<br><br>
