@@ -18,6 +18,6 @@ describe('Controller: MainCtrl', function () {
   }));
 
   it('Sample Test', function () {
-    expect(3).toBe(3);
+    expect(true).toBe(true);
   });
 });
