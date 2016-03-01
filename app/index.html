@@ -39,9 +39,9 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Accueil</a></li>
-              <li><a ng-href="#/search">Recherche</a></li>
-              <li><a id="idInscription" ng-href="#/inscription">Inscription</a></li>
+              <li ng-class="{ active: isActive('#/')}"><a href="#/">Accueil</a></li>
+              <li ng-class="{ active: isActive('#/inscription')}"><a ng-href="#/search">Recherche</a></li>
+              <li ng-class="{ active: isActive('#/search')}"><a id="idInscription" ng-href="#/inscription">Inscription</a></li>
               <li><a ng-href="#/contact">Contact</a></li>
             </ul>
           </div>

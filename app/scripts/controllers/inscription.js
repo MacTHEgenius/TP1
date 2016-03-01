@@ -12,7 +12,7 @@ myApp.controller('inscriptionController', function ($scope) {
 	$scope.showForm=true;
 	$scope.isValid=function(){
     	return $scope.inscriptionForm.$valid && $scope.passwordM==$scope.confirmPasswordM;
-	}
+	};
 	$scope.submit=function(){
 		if(!$scope.isValid())
 		{
@@ -22,6 +22,6 @@ myApp.controller('inscriptionController', function ($scope) {
 			$scope.inscriptionForm.passwordInput.$touched=true;
 			$scope.inscriptionForm.confirmPasswordInput.$touched=true;
 		}
-		else $scope.showForm=false;
+		else {$scope.showForm=false;}
 	}
   });

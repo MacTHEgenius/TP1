@@ -8,6 +8,8 @@
  * Controller of the tp1App
  */
 angular.module('tp1App')
-  .controller('MainCtrl', function () {
-  
+  .controller('MainCtrl', function ($scope, $location) {
+  $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
   });
