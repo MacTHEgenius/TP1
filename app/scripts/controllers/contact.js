@@ -17,4 +17,21 @@ angular.module('tp1App')
           {reason: 'Entreprise'}
       ];
 
+      $scope.showContactForm = true;
+
+      $scope.submit = function() {
+          if (!$scope.isFormValid()) {
+              $scope.contactForm.username.$touched = true;
+              $scope.contactForm.reason.$touched = true;
+              $scope.contactForm.email.$touched = true;
+              $scope.contactForm.message.$touched = true;
+          } else {
+              $scope.showContactForm = false;
+          }
+      };
+
+      $scope.isFormValid = function() {
+          return $scope.contactForm.$valid;
+      };
+
   });
