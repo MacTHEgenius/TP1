@@ -31,6 +31,11 @@ angular
         controller: 'inscriptionController',
         controllerAs: 'inscription'
       })
+      .when('/search', {
+        templateUrl: 'views/search.html',
+        controller: 'searchController',
+        controllerAs: 'search'
+      })
       .otherwise({
         redirectTo: '/'
       });

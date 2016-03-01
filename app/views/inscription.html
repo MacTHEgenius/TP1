@@ -39,13 +39,13 @@
 <br><br>
 
 
-	<input class="btn btn-default" type="button" value="Confirmer" ng-click="submit()"/>
-		
-<br><br>		
+	<input id="idSubmitButton" class="btn btn-default" type="button" value="Confirmer" ng-click="submit()"/>
+
+<br><br>
 </form>
 <div ng-show="!showForm">
 <h4>Nom :</h4>
-<p>{{firstName}} {{nameM}}</p>
+<p id="confirmationId">{{firstName}} {{nameM}}</p>
 <h4>Addresse couriel :</h4>
 <p>{{emailM}}</p>
 <h4>Le mot de passe fait {{passwordM.length}} charactères</h4>
