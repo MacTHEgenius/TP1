@@ -23,5 +23,5 @@ myApp.controller('inscriptionController', function ($scope) {
 			$scope.inscriptionForm.confirmPasswordInput.$touched=true;
 		}
 		else {$scope.showForm=false;}
-	}
+	};
   });

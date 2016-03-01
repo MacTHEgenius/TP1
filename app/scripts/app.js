@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var app=angular
   .module('tp1App', [
     'ngAnimate',
     'ngAria',
@@ -17,9 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+    'ngTouch']);
+app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -36,10 +35,10 @@ angular
         controller: 'searchController',
         controllerAs: 'search'
       })
-      .when('/contact', {
-        templateUrl: 'views/contact.html',
-        controller: 'ContactCtrl',
-        controllerAs: 'Contact'
+      .when('/newMovies', {
+        templateUrl: 'views/newMovies.html',
+        controller: 'newMoviesController',
+        controllerAs: 'newMovies'
       })
       .otherwise({
         redirectTo: '/'
