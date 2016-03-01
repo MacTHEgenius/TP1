@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="../styles/contact.css">
 
-<h1>Contact</h1>
+<div class="jumbotron">
+    <h1>Contact</h1>
+</div>
 <hr>
 <br>
 
@@ -10,8 +12,9 @@
         <div class="form-group">
             <label class="control-label col-xs-3">Nom de l'utilisateur</label>
             <div class="col-xs-4">
-                <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" ng-pattern="/[A-Za-z -]+"/>
-                <span ng-show="contactForm.username.$error.pattern" style="color:red">Hello</span>
+                <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" ng-model="username" required ng-pattern="/[A-Za-z -]+/"/>
+                    <span ng-show="contactForm.username.$error.pattern" style="color:red">Hello</span>
+                    <span ng-show="contactForm.username.$touched && contactForm.username.$error.required" style="color:red">Le prénom est requis.</span>
             </div>
         </div>
 
