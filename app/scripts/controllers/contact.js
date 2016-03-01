@@ -8,10 +8,13 @@
  * Controller of the tp1App
  */
 angular.module('tp1App')
-  .controller('ContactCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('ContactCtrl', function ($scope) {
+
+      $scope.dropdownElements = [
+          {reason: 'Problème technique'},
+          {reason: 'Don'},
+          {reason: 'Commentaire'},
+          {reason: 'Entreprise'}
+      ];
+
   });

@@ -1,1 +1,50 @@
-<p>This is the Contact view.</p>
+<link rel="stylesheet" href="../styles/contact.css">
+
+<h1>Contact</h1>
+<hr>
+<br>
+
+<div class="container">
+    <form class="form-horizontal" name="contactForm">
+
+        <div class="form-group">
+            <label class="control-label col-xs-3">Nom de l'utilisateur</label>
+            <div class="col-xs-4">
+                <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" ng-pattern="/[A-Za-z -]+"/>
+                <span ng-show="contactForm.username.$error.pattern" style="color:red">Hello</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-3">Raison du contact</label>
+            <div class="col-xs-4">
+                <select class="form-control" title="Choisir...">
+                    <option ng-repeat="element in dropdownElements"><div>{{element.reason}}</div></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Email</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="email" placeholder="Email">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Message</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" rows="5" placeholder="Votre message..."/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-10">
+                <button class="btn btn-primary" type="submit" name="button">Envoyer</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<br>
