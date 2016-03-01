@@ -4,20 +4,21 @@
 <form class="form-group">
 <p>Recherche :</p>
 <input class="form-control" ng-model="searchM" placeholder="Titre..."/>
-<span ng-show="showEmptyError" style="color:red">Vous devez entrer au moins une lettre.</span>
+<span id="emptyErrorId" ng-show="showEmptyError" style="color:red">Vous devez entrer au moins deux lettre.</span>
 <br>
 <br>
-<input class="btn btn-default" type="button" value="Rechercher" ng-click="submit()"/>
+<button id="submitButtonId" class="btn btn-default" ng-click="submit()">Rechercher</button>
 </form>
 <br>
 <br>
-<span ng-show="showServerError" style="color:red">Une erreur est survenue pendant l'appel du serveur.</span>
+<span id="serverErrorId" ng-show="showServerError" style="color:red">Une erreur est survenue pendant l'appel du serveur.</span>
+<span id="noResultErrorId" ng-show="showNoResultError" style="color:red">Aucun résultat pour la requête spécifiée.</span>
 <div ng-show="showMovies">
 <p>Nombre de films : {{totalResults}}</p>
 <ul>
 	<li ng-repeat="data in datas">
 		<h3>{{data.Title}}</h5>
-		<span ng-show="data.Poster!='N/A'"><img src="{{data.Poster}}"/></span>
+		<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
 		<span ng-show="data.Poster=='N/A'"><p>Pas de Poster</p></span>
 		<p>{{data.Year}}</p>
 		<hr>

@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var app=angular
   .module('tp1App', [
     'ngAnimate',
     'ngAria',
@@ -17,9 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+    'ngTouch']);
+app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
