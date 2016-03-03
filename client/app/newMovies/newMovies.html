@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="newMovies.css">
+<div ng-controller="newMoviesController">
+
+<span id="serverErrorId" ng-show="showServerError" style="color:red">Une erreur est survenue pendant l'appel du serveur.
+<a onclick='location.reload(true); return false;'><button>Actualiser</button></a></span>
+<div ng-show="showMovies">
+<h1>Films de l'année 2016</h1>
+<ul>
+	<li ng-repeat="data in datas | limitTo:6">
+		<h3>{{data.Title}}</h5>
+		<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
+		<span ng-show="data.Poster=='N/A'"><p>Pas de Poster</p></span>
+		<hr>
+	</li>
+</ul>
+</div>
+<br><br>
