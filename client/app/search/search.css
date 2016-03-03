@@ -1,0 +1,23 @@
+.tile {
+  display: inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 20px;
+  width: 25em;
+  float: auto;
+  text-align: center;
+  z-index: 1;
+  margin: 1em auto;
+}
+.tile .title {
+  margin-top: 0px;
+}
+.tile.blue {
+  color: #fff;
+}
+.tile.blue {
+    background: #0C688A
+}
+.tile.blue:hover {
+  background: #08A2CC;
+}

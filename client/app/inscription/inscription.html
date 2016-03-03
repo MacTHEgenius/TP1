@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="inscription.css">
+<div ng-controller="inscriptionController">
+	<div class="jumbotron">
+      	<h1>Inscription</h1>
+    </div>
+	<div class="container">
+		<form novalidate class="form-horizontal" name="inscriptionForm" ng-show="showForm">
+
+		<div class="form-group" ng-class="control-group">
+			<label class="control-label col-xs-3">Prénom</label>
+			<div class="col-xs-6">
+				<input class="form-control" name="firstnameInput" ng-model="firstName" required ng-pattern="/[A-Za-z -]+/" type="text"/>
+				<span ng-show="inscriptionForm.firstnameInput.$touched && inscriptionForm.firstnameInput.$error.required" style="color:red">Le prénom est requis.</span>
+				<span ng-show="!inscriptionForm.firstnameInput.$error.required && inscriptionForm.firstnameInput.$error.pattern" style="color:red">Le prénom doit être valide.</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-xs-3">Nom</label>
+			<div class="col-xs-6">
+				<input class="form-control" name="nameInput" ng-model="nameM" required ng-pattern="/[A-Za-z -]+/" type="text"/>
+				<span ng-show="inscriptionForm.nameInput.$touched && inscriptionForm.nameInput.$error.required" style="color:red">Le nom est requis.</span>
+				<span ng-show="!inscriptionForm.nameInput.$error.required && inscriptionForm.nameInput.$error.pattern" style="color:red">Le nom doit être valide.</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-xs-3">Addresse courriel</label>
+			<div class="col-xs-6">
+				<input class="form-control" type="email" name="emailInput" ng-model="emailM" required>
+				<span ng-show="inscriptionForm.emailInput.$touched && inscriptionForm.emailInput.$error.required" style="color:red">L'addresse couriel est requise.</span>
+				<span ng-show="inscriptionForm.emailInput.$touched && inscriptionForm.emailInput.$error.email" style="color:red">L'addresse couriel doit être valide.</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-xs-3">Mot de passe</label>
+			<div class="col-xs-6">
+				<input class="form-control" name="passwordInput" ng-model="passwordM" type="password" required/>
+				<span ng-show="inscriptionForm.passwordInput.$touched && inscriptionForm.passwordInput.$error.required" style="color:red">Le mot de passe est requis.</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-xs-3">Confirmation du mot de passe</label>
+			<div class="col-xs-6">
+				<input class="form-control" name="confirmPasswordInput" ng-model="confirmPasswordM" type="password" required confirm-password="passwordM"/>
+				<span ng-show="inscriptionForm.confirmPasswordInput.$touched && inscriptionForm.confirmPasswordInput.$error.required" style="color:red">La confirmation du mot de passe est requise.</span>
+				<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && inscriptionForm.confirmPasswordInput.$error.confirmPassword" style="color:red">Le mot de passe n'est pas semblable.</span>
+				<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && !inscriptionForm.confirmPasswordInput.$error.confirmPassword" style="color:green">Confirmé.</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-xs-offset-3 col-xs-10">
+				<input id="idSubmitButton" class="btn btn-primary" type="button" value="Confirmer" ng-click="submit()"/>
+			</div>
+		</div>
+
+	</div>
+
+
+<br><br>
+</form>
+<div ng-show="!showForm">
+<h4>Nom :</h4>
+<p id="confirmationId">{{firstName}} {{nameM}}</p>
+<h4>Addresse couriel :</h4>
+<p>{{emailM}}</p>
+<h4>Le mot de passe fait {{passwordM.length}} charactères</h4>
+<p>Merci de participer au Grand Projet!</p>
+</div>
+</div>
