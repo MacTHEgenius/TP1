@@ -32,10 +32,10 @@
 
 
 	Confirmation du mot de passe :<br>
-	<input class="form-control" name="confirmPasswordInput" ng-model="confirmPasswordM" type="password" required/>
+	<input class="form-control" name="confirmPasswordInput" ng-model="confirmPasswordM" type="password" required confirm-password="passwordM"/>
 		<span ng-show="inscriptionForm.confirmPasswordInput.$touched && inscriptionForm.confirmPasswordInput.$error.required" style="color:red">La confirmation du mot de passe est requise.</span>
-		<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && confirmPasswordM!=passwordM" style="color:red">Le mot de passe n'est pas semblable.</span>
-		<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && confirmPasswordM==passwordM" style="color:green">Confirmé.</span>
+		<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && inscriptionForm.confirmPasswordInput.$error.confirmPassword" style="color:red">Le mot de passe n'est pas semblable.</span>
+		<span ng-show="!inscriptionForm.confirmPasswordInput.$error.required && !inscriptionForm.confirmPasswordInput.$error.confirmPassword" style="color:green">Confirmé.</span>
 <br><br>
 
 
