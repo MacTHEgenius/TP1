@@ -51,7 +51,7 @@
 
       <div class="form-group">
         <div class="col-xs-offset-3 col-xs-10">
-          <button class="btn btn-primary" type="submit" name="button" ng-click="submit()">Envoyer</button>
+          <button id="idSubmitButton" class="btn btn-primary" type="submit" name="button" ng-click="submit()">Envoyer</button>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
   <br>
 
   <div class="form-horizontal" ng-show="!showContactForm">
-      <div class="form-group">
+      <div id="confirmationId" class="form-group">
           <label class="control-label col-xs-3">Nom d'utilisateur</label>
           <div class="col-xs-9">
               {{username}}
