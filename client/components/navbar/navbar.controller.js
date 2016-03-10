@@ -17,6 +17,9 @@ angular.module('webApp')
     },{
     	'title': 'Contact',
     	'link': '/contact'
+    },{
+    	'title': 'Commentaires',
+    	'link': '/comment'
     }];
 
     $scope.isCollapsed = true;

@@ -42,7 +42,7 @@
       <div class="form-group">
         <label class="col-xs-3 control-label">Message</label>
         <div class="col-sm-9">
-          <textarea class="form-control" name="message" rows="5" placeholder="Votre message..." required ng-model="message" />
+          <textarea class="form-control" name="message" rows="5" placeholder="Votre message..." required ng-model="message"></textarea>
           <span ng-show="contactForm.message.$touched && contactForm.message.$error.required" style="color:red">Le message est requis.</span>
         </div>
       </div>
@@ -56,7 +56,7 @@
     </form>
   </div>
 
-  <br>
+  <br/>
 
   <div class="form-horizontal" ng-show="!showContactForm">
       <div id="confirmationId" class="form-group">

@@ -14,8 +14,8 @@
 			<span class="col-xs-9 col-xs-offset-3" id="emptyErrorId" ng-show="showEmptyError" style="color:red">Vous devez entrer au moins deux lettre.</span>
 		</div>
 	</form>
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<span id="serverErrorId" ng-show="showServerError" style="color:red">Une erreur est survenue pendant l'appel du serveur.</span>
 	<span id="noResultErrorId" ng-show="showNoResultError" style="color:red">Aucun résultat pour la requête spécifiée.</span>
 	<div ng-show="showMovies">
@@ -25,13 +25,10 @@
 				<div class="tile blue">
 					<h3>{{data.Title}}</h5>
 					<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
-					<span ng-show="data.Poster=='N/A'"><img ng-src="../../assets/images/movie-placeholder.jpg" /></span>
+					<span ng-show="data.Poster=='N/A'"><img ng-src="movie-placeholder.jpg" /></span>
 					<p>{{data.Year}}</p>
 				</div>
 			</div>
 		</center>
 	</div>
 </div>
-<br>
-<br>
-<br>

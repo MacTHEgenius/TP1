@@ -42,14 +42,6 @@ myApp.controller('searchController', function ($scope, $http) {
    			$scope.showMovies=true;
    			$scope.showNoResultError=false;
    			$scope.totalResults=response.data.totalResults;
-   			//ajoute le "s" pour https
-   			for(var i=0; i<response.data.Search.length; i++)
-   			{
-   				if(response.data.Search[i].Poster!=="N/A")
-   				{
-   					response.data.Search[i].Poster=response.data.Search[i].Poster.substr(0, 4)+'s'+response.data.Search[i].Poster.substr(4);
-   				}
-   			}
    			$scope.datas=response.data.Search;
 		}, function errorCallback() {
      		$scope.showServerError=true;

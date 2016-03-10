@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="comment.css">
+<div ng-controller="commentController">
+	<div class="jumbotron">
+      	<h1>Commentaires</h1>
+    </div>
+   	<div ng-repeat="data in datas">
+   		<h1>User {{data.id}}</h1>
+   		<p>{{data.body}}</p>
+   		<p>{{data.createAt}}</p>
+   		<p>{{data.userId}}</p>
+   	</div>
+</div>
