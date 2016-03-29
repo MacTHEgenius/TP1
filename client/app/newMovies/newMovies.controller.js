@@ -12,7 +12,7 @@ myApp.controller('newMoviesController', function ($scope, $http) {
 	$scope.showMovies=false;
 	$scope.showServerError=false;
 	$scope.datas=[];
-	$scope.getFilms=function(){$http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 2000}).then(
+	$scope.getFilms=function(){$http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
    	function successCallback(response) {
    		if(response.data.Response=="False")
    		{

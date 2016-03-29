@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="inscription.css">
+<div ng-controller="loginController">
+	<div class="jumbotron">
+      	<h1>Login</h1>
+    </div>
+    <div ng-show="!userConnected">
+		<div id="serverErrorId" ng-show="serverError" style="color:red">
+			Courriel ou mot de passe invalide
+		</div>
+		<div class="container">
+			<form novalidate class="form-horizontal" name="loginForm" ng-show="showForm">
+			
+				<div class="form-group" ng-class="control-group">
+					<label class="control-label col-xs-3">Courriel</label>
+					<div class="col-xs-6">
+						<input class="form-control" type="email" name="emailInput" ng-model="emailM" required focus-me="true">
+						<span id="emailError1Id" ng-show="loginForm.emailInput.$touched && loginForm.emailInput.$error.required" style="color:red">Requis</span>
+						<span id="emailError2Id" ng-show="loginForm.emailInput.$touched && loginForm.emailInput.$error.email" style="color:red">L'addresse couriel doit être valide.</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-xs-3">Mot de passe</label>
+					<div class="col-xs-6">
+						<input class="form-control" name="passwordInput" ng-model="passwordM" type="password" ng-pattern="/.{3,}/" required/>
+						<span id="passwordError1Id" ng-show="loginForm.passwordInput.$touched && loginForm.passwordInput.$error.required" style="color:red">Requis</span>
+						<span id="passwordError2Id" ng-show="loginForm.passwordInput.$touched && loginForm.passwordInput.$error.pattern" style="color:red">Trois charactères et plus</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-offset-3 col-xs-10">
+						<button id="idSubmitButton" class="btn btn-primary" type="submit" ng-click="submit()">Confirmer</button>
+					</div>
+				</div>
+
+				<br/><br/>
+			</form>
+		</div>
+		<div ng-show="!showForm">
+			<h4 id="confirmationId">Connexion réussit</h4>
+			<p>Merci de participer au Grand Projet!</p>
+			<br/><br/>
+		</div>
+	</div>
+	
+	<div ng-show="userConnected">
+		<center>
+			<p>Vous êtes déjà connecté</p>
+			<input id="idDisconnectButton" class="btn btn-default" type="button" value="Déconnexion" ng-click="disconnect()"/>
+		</center>
+		<br/><br/><br/>
+	</div>
+</div>

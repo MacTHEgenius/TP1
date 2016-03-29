@@ -65,6 +65,6 @@ describe('Controller: searchController', function () {
 	expect(scope.showEmptyError).toBe(false);
 	expect(scope.showServerError).toBe(true);
 	expect(scope.showNoResultError).toBe(false);},
-	5000);
+	6000);
   });
 });

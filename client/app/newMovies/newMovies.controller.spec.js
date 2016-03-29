@@ -33,7 +33,7 @@ describe('Controller: newMoviesController', function () {
   	timeout.flush(function(){
   	expect(scope.showMovies).toBe(false);
 	expect(scope.showServerError).toBe(true);},
-	5000);
+	6000);
   });
 
   it('should show right error when query timedout', function(){

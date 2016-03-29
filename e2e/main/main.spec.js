@@ -3,6 +3,7 @@
 describe("index page e2e tests", function(){
 
 	beforeEach(function(){
+		browser.manage().deleteAllCookies();
 		browser.get("/");
 	});
 	
@@ -28,6 +29,11 @@ describe("index page e2e tests", function(){
 	it("should should go to newMovies page when clicked", function(){
 		element(by.linkText("Nouveautés")).click();
 		expect(browser.getCurrentUrl()).toBe("http://localhost:9000/newMovies");
+	});
+	
+	it("should should go to login page when clicked", function(){
+		element(by.linkText("Connexion")).click();
+		expect(browser.getCurrentUrl()).toBe("http://localhost:9000/login");
 	});
 	//access navbar and expect it to ge to the right pages
 });
