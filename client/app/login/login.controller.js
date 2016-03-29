@@ -27,6 +27,11 @@ myApp.controller('loginController', function ($scope, LoginPost, $rootScope, $co
 				$scope.serverError=true;
 			});
 		}
+		else
+		{
+			$scope.loginForm.emailInput.$touched=true;
+			$scope.loginForm.passwordInput.$touched=true;
+		}
 	}
 	$scope.disconnect=function(){
 		$scope.showForm=true;
