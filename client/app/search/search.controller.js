@@ -8,13 +8,35 @@
  * Controller of the tp1App
  */
 var myApp=angular.module('webApp');
-myApp.controller('searchController', function ($scope, $http) {
+myApp.controller('searchController', function ($scope, $http, FavoritesService) {
 	$scope.showMovies=false;
 	$scope.showEmptyError=false;
 	$scope.showServerError=false;
 	$scope.showNoResultError=false;
 	$scope.totalResults=0;
 	$scope.datas=[];
+	$scope.fillSelected=function(){
+		FavoritesService.getAll().query({}, function(responce){
+			for(var apiId in responce)
+			{
+				for(var data in $scope.datas)
+				{
+					if(responce[apiId].movie_id==$scope.datas[data].imdbID)
+					{
+						$scope.datas[data].isFavorite=true;
+						$scope.datas[data].apiId=responce[apiId].id;
+						if(responce[apiId].status==1)$scope.datas[data].isSelected=true;
+						else $scope.datas[data].isSelected=false;
+					}
+				}
+			}
+		}, function(error){
+			$scope.showServerError=true;
+     		$scope.showMovies=false;
+     		$scope.showNoResultError=false;
+     		$scope.datas=[];
+		});
+	}
 	$scope.submit=function(){
 		if($scope.searchM===undefined){$scope.searchM="";}
 		if($scope.searchM.length<2)
@@ -43,10 +65,37 @@ myApp.controller('searchController', function ($scope, $http) {
    			$scope.showNoResultError=false;
    			$scope.totalResults=response.data.totalResults;
    			$scope.datas=response.data.Search;
+   			$scope.fillSelected();
 		}, function errorCallback() {
      		$scope.showServerError=true;
      		$scope.showMovies=false;
      		$scope.showNoResultError=false;
+     		$scope.datas=[];
 		});
+	};
+	$scope.addFavorite=function(index){
+		if($scope.datas[index].isFavorite)
+		{
+			FavoritesService.createNew().save({movie_id:$scope.datas[index].imdbID}, function(success){
+				$scope.datas[index].apiId=success.id;
+				FavoritesService.change().update({id:$scope.datas[index].apiId, movie_id:$scope.datas[index].imdbID, status:0});
+			});
+		}
+		else
+		{
+			FavoritesService.change().delete({id:$scope.datas[index].apiId});
+		}
+		$scope.datas[index].selected=false;
+	};
+	$scope.addSelected=function(index){
+		console.log($scope.datas[index]);
+		if($scope.datas[index].isSelected)
+		{
+			FavoritesService.change().update({id:$scope.datas[index].apiId, movie_id:$scope.datas[index].imdbID, status:1});
+		}
+		else
+		{
+			FavoritesService.change().update({id:$scope.datas[index].apiId, movie_id:$scope.datas[index].imdbID, status:0});
+		}
 	};
 });

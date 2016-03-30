@@ -1,30 +1,30 @@
 var myApp = angular.module('webApp');
-myApp.factory('ConnectionService', function($rootScope, $cookies)
+myApp.factory('ConnectionService', function($rootScope)
 {
 	var clear=function(){
 		var user={userEmail:"Connexion", userConnected:false};
 		if($rootScope.globals===undefined)$rootScope.globals={};
 		$rootScope.globals.user=user;
-		$cookies.putObject("globals.user", user);
+		localStorage.setItem("globals.user", JSON.stringify(user));
 	}
 	return {
 		setUser:function(user){
 			if($rootScope.globals===undefined)$rootScope.globals={};
 			$rootScope.globals.user=user;
-			$cookies.putObject("globals.user", user);
+			localStorage.setItem("globals.user", JSON.stringify(user));
 			$rootScope.$broadcast('updateUser');
 		},
 		getUser:function(){
 			if($rootScope.globals===undefined)
 			{
 				$rootScope.globals={};
-				$rootScope.globals.user=$cookies.getObject("globals.user");
+				$rootScope.globals.user=JSON.parse(localStorage.getItem("globals.user"));
 			}
 			else if($rootScope.globals.user===undefined)
 			{
-				$rootScope.globals.user=$cookies.getObject("globals.user");
+				$rootScope.globals.user=JSON.parse(localStorage.getItem("globals.user"));
 			}
-			if($rootScope.globals.user===undefined)//no cookies
+			if($rootScope.globals.user==null)//no localStorage
 			{
 				clear();
 			}

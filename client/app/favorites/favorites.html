@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="favorites.css">
+<div ng-controller="favoritesController">
+	<div class="jumbotron">
+		<h1>Films de l'année 2016</h1>
+	</div>
+	<span id="serverErrorId" ng-show="showServerError" style="color:red">
+		Une erreur est survenue pendant l'appel du serveur.
+		<a onclick='location.reload(true); return false;'><button>Actualiser</button></a>
+	</span>
+	<span id="unauthorizedErrorId" ng-show="showUnauthorizedError" style="color:red">
+		Vous n'êtes pas autorisé à visiter cette page.
+	</span>
+	<div ng-show="datas!=[]">
+		<h2 style="text-align:center">Nombre de films : {{datas.length}}</h2>
+		<ng-include src="'components/favorites/favorites.tiles.html'"></ng-include>
+	</div>
+</div>
+<br><br><br>

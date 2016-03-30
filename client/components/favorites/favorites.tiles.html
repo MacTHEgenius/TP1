@@ -1,0 +1,14 @@
+<center>
+	<div class="col-xs-6" ng-repeat="data in datas">
+		<div class="tile blue">
+			<h3>{{data.Title}}</h5>
+			<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
+			<span ng-show="data.Poster=='N/A'"><img ng-src="movie-placeholder.jpg" /></span>
+			<p>{{data.Year}}</p>
+			<input type="checkbox" ng-model="data.isFavorite" ng-click="addFavorite($index)">Favoris<br/>
+			<span ng-show="data.isFavorite">
+				<input  type="checkbox" ng-model="data.isSelected" ng-click="addSelected($index)">Visionné
+			</span>
+		</div>
+	</div>
+</center>
