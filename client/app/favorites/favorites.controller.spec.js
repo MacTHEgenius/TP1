@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: newMoviesController', function () {
+describe('Controller: favoritesController', function () {
 
   // load the controller's module
   beforeEach(module('webApp'));
@@ -15,7 +15,7 @@ describe('Controller: newMoviesController', function () {
   	httpBackend=$httpBackend;
   	timeout=$timeout;
     scope = $rootScope.$new();
-    newMoviesController = $controller('newMoviesController', {
+    newMoviesController = $controller('favoritesController', {
       $scope: scope
       // place here mocked dependencies
     });
