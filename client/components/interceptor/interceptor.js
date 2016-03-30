@@ -1,4 +1,4 @@
-angular.module('webApp').config(function ($locationProvider, $httpProvider, jwtInterceptorProvider)
+angular.module('webApp').config(['$httpProvider', 'jwtInterceptorProvider', function ($httpProvider, jwtInterceptorProvider)
 {
  
     jwtInterceptorProvider.tokenGetter = function(config, jwtHelper) {
@@ -35,4 +35,4 @@ angular.module('webApp').config(function ($locationProvider, $httpProvider, jwtI
  
   $httpProvider.interceptors.push('jwtInterceptor');
  
-}) ;
+}]) ;
