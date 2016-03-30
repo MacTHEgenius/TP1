@@ -11,15 +11,42 @@
 		<div class="row">
 			<center>
 				<div class="col-xs-6" ng-repeat="data in datas | limitTo:6">
-					<div class="">
-						<div class="tile blue">
-							<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
-							<span ng-show="data.Poster=='N/A'"><img ng-src="movie-placeholder.jpg" /></span>
-							<h3>{{data.Title}}</h3>
-						</div>
+					<div class="container">
+            <div ng-mouseenter="toFlip($index)" ng-class="'card'+tmpClass[$index]">
+              <figure class="front">
+                <div class="tile blue">
+                  <span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
+                  <span ng-show="data.Poster=='N/A'"><img ng-src="movie-placeholder.jpg" /></span>
+                  <h3>{{data.Title}}</h3>
+                </div>
+              </figure>
+              <figure class="back">
+
+              </figure>
+            </div>
 					</div>
 				</div>
 			</center>
 		</div>
 	</div>
+
+  <section class="container">
+    <div id="card" ng-mouseenter="toFlip()">
+      <figure class="front">1</figure>
+      <figure class="back">2</figure>
+    </div>
+  </section>
+
+<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
 </div>

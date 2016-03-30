@@ -12,6 +12,7 @@ myApp.controller('newMoviesController', function ($scope, $http) {
 	$scope.showMovies=false;
 	$scope.showServerError=false;
 	$scope.datas=[];
+	$scope.tmpClass = [];
 	$scope.getFilms=function(){$http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
    	function successCallback(response) {
    		if(response.data.Response=="False")
@@ -29,4 +30,12 @@ myApp.controller('newMoviesController', function ($scope, $http) {
 	});
 	};
 	$scope.getFilms();
+
+	$scope.toFlip = function (index) {
+		if($scope.tmpClass[index] == undefined || $scope.tmpClass[index] == "") {
+			$scope.tmpClass[index] = " flipped";
+		} else {
+			$scope.tmpClass[index] = "";
+		}
+	};
 });
