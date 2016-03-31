@@ -46,7 +46,7 @@ describe('Controller: favoritesController', function () {
 		httpBackend.flush();
 		httpBackend.when('DELETE', "https://crispesh.herokuapp.com/api/favs/207").respond({});
 		httpBackend.expectDELETE("https://crispesh.herokuapp.com/api/favs/207");
-		scope.addFavorite(0);
+		scope.deleteFavorite(0);
 		httpBackend.flush();
 		//expect(scope.datas.length).toBe(0);
 	});
