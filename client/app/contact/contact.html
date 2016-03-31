@@ -5,6 +5,9 @@
   <div class="jumbotron">
     <h1>Contact</h1>
   </div>
+  <span id="serverErrorId" ng-show="showServerError" style="color:red">
+	Une erreur est survenue pendant l'appel du serveur.
+  </span>
 
   <div class="container">
     <form novalidate class="form-horizontal" name="contactForm" ng-show="showContactForm">
@@ -12,7 +15,7 @@
       <div class="form-group">
         <label class="control-label col-xs-3">Nom de l'utilisateur</label>
         <div class="col-xs-4">
-          <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" ng-model="username" required ng-pattern="/[a-zA-Z -]+/" focus-me="true"/>
+          <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" ng-model="usernameM" required ng-pattern="/[a-zA-Z -]+/" focus-me="true"/>
           <span ng-show="contactForm.username.$error.pattern && !contactForm.username.$error.required" style="color:red">Le nom d'utilisateur est non-valide.</span>
           <span ng-show="contactForm.username.$touched && contactForm.username.$error.required" style="color:red">Le nom d'utilisateur est requis.</span>
         </div>
@@ -21,7 +24,7 @@
       <div class="form-group">
         <label class="control-label col-xs-3">Raison du contact</label>
         <div class="col-xs-4">
-          <select class="form-control" title="Choisir..." name="reason" required ng-model="reason">
+          <select class="form-control" title="Choisir..." name="reason" required ng-model="reasonM">
             <option ng-repeat="element in dropdownElements">
               <div>{{element.reason}}</div>
             </option>
@@ -33,7 +36,7 @@
       <div class="form-group">
         <label class="col-xs-3 control-label">Email</label>
         <div class="col-sm-6">
-          <input class="form-control" type="email" name="email" placeholder="Email" required ng-model="email">
+          <input class="form-control" type="email" name="email" placeholder="Email" required ng-model="emailM">
           <span ng-show="contactForm.email.$touched && contactForm.email.$error.required" style="color:red">Le email est requis.</span>
           <span ng-show="contactForm.email.$touched && contactForm.email.$error.email" style="color:red">Le email est non-valide.</span>
         </div>
@@ -42,7 +45,7 @@
       <div class="form-group">
         <label class="col-xs-3 control-label">Message</label>
         <div class="col-sm-9">
-          <textarea class="form-control" name="message" rows="5" placeholder="Votre message..." required ng-model="message"></textarea>
+          <textarea class="form-control" name="message" rows="5" placeholder="Votre message..." required ng-model="messageM"></textarea>
           <span ng-show="contactForm.message.$touched && contactForm.message.$error.required" style="color:red">Le message est requis.</span>
         </div>
       </div>
@@ -62,25 +65,25 @@
       <div id="confirmationId" class="form-group">
           <label class="control-label col-xs-3">Nom d'utilisateur</label>
           <div class="col-xs-9">
-              {{username}}
+              {{usernameM}}
           </div>
       </div>
       <div class="form-group">
           <label class="control-label col-xs-3">Raison</label>
           <div class="col-xs-9">
-              {{reason}}
+              {{reasonM}}
           </div>
       </div>
       <div class="form-group">
           <label class="control-label col-xs-3">Email</label>
           <div class="col-xs-9">
-              {{email}}
+              {{emailM}}
           </div>
       </div>
       <div class="form-group">
           <label class="control-label col-xs-3">Message</label>
           <p class="col-xs-9">
-              {{message}}
+              {{messageM}}
           </p>
       </div>
   </div>
