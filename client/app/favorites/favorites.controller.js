@@ -38,7 +38,7 @@ myApp.controller('favoritesController', function ($scope, $http, FavoritesServic
 			else $scope.showServerError=true;
 		});
 	};
-	$scope.addFavorite=function(index){
+	$scope.deleteFavorite=function(index){
 		FavoritesService.change().delete({id:$scope.datas[index].apiId});
 		$scope.datas.splice(index, 1);
 	};

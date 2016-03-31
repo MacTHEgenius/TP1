@@ -1,5 +1,4 @@
 <center>
-	{{userConnected}}
 	<div class="col-xs-6" ng-repeat="data in datas">
 		<div class="tile blue">
 			<h3>{{data.Title}}</h5>
@@ -7,8 +6,13 @@
 			<span ng-show="data.Poster=='N/A'"><img ng-src="movie-placeholder.jpg" /></span>
 			<p>{{data.Year}}</p>
 			<span ng-show="userConnected==true">
-				<input type="checkbox" ng-model="data.isFavorite" ng-click="addFavorite($index)">Favoris<br/>
+				<span ng-show="!data.isFavorite">
+					<button ng-click="addFavorite($index)" class="btn btn-success">Ajouter aux favoris</button>
+				</span>
+				<!--<input type="checkbox" ng-model="data.isFavorite" ng-click="addFavorite($index)">Favoris<br/>-->
 				<span ng-show="data.isFavorite">
+					<button ng-click="deleteFavorite($index)" class="btn btn-default">Retirer des favoris</button>
+					<br/>
 					<input  type="checkbox" ng-model="data.isSelected" ng-click="addSelected($index)">Visionné
 				</span>
 			</span>

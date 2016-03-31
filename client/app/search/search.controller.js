@@ -78,19 +78,17 @@ myApp.controller('searchController', function ($scope, $http, FavoritesService, 
 		});
 	};
 	$scope.addFavorite=function(index){
-		if($scope.datas[index].isFavorite)
-		{
-			FavoritesService.createNew().save({movie_id:$scope.datas[index].imdbID}, function(success){
-				$scope.datas[index].apiId=success.id;
-				FavoritesService.change().update({id:$scope.datas[index].apiId, movie_id:$scope.datas[index].imdbID, status:0});
-			});
-		}
-		else
-		{
-			FavoritesService.change().delete({id:$scope.datas[index].apiId});
-		}
+		FavoritesService.createNew().save({movie_id:$scope.datas[index].imdbID}, function(success){
+			$scope.datas[index].apiId=success.id;
+			FavoritesService.change().update({id:$scope.datas[index].apiId, movie_id:$scope.datas[index].imdbID, status:0});
+		});
+		$scope.datas[index].isFavorite=true;
 		$scope.datas[index].selected=false;
 	};
+	$scope.deleteFavorite=function(index){
+		$scope.datas[index].isFavorite=false;
+		FavoritesService.change().delete({id:$scope.datas[index].apiId});
+	}
 	$scope.addSelected=function(index){
 		console.log($scope.datas[index]);
 		if($scope.datas[index].isSelected)

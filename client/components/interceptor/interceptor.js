@@ -1,11 +1,10 @@
 angular.module('webApp').config(['$httpProvider', 'jwtInterceptorProvider', function ($httpProvider, jwtInterceptorProvider)
 {
- 
     jwtInterceptorProvider.tokenGetter = ['config', 'jwtHelper', function(config, jwtHelper) {
  
     // Do not use token to get .html templates
     //console.log(config);
-    if (config.url.indexOf("api/comments") ==-1 && config.url.indexOf("api/favs") ==-1 && config.url.indexOf("api/contact") ==-1)
+    if (config.url.indexOf("api/comments") ==-1 && config.url.indexOf("api/favs") ==-1)
     {
       return null;
     }
