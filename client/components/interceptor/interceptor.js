@@ -1,7 +1,7 @@
 angular.module('webApp').config(['$httpProvider', 'jwtInterceptorProvider', function ($httpProvider, jwtInterceptorProvider)
 {
  
-    jwtInterceptorProvider.tokenGetter = function(config, jwtHelper) {
+    jwtInterceptorProvider.tokenGetter = ['config', 'jwtHelper', function(config, jwtHelper) {
  
     // Do not use token to get .html templates
     //console.log(config);
@@ -31,7 +31,7 @@ angular.module('webApp').config(['$httpProvider', 'jwtInterceptorProvider', func
       //console.log("Token not expired", jwtHelper.getTokenExpirationDate(jwt));
       return jwt;
     }
-  };
+  }];
  
   $httpProvider.interceptors.push('jwtInterceptor');
  
