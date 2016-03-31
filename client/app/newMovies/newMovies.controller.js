@@ -9,45 +9,29 @@
  */
 var myApp=angular.module('webApp');
 myApp.controller('newMoviesController', function ($scope, $http) {
-	$scope.showMovies=false;
-	$scope.showServerError=false;
-	$scope.datas=[];
-<<<<<<< HEAD
+	$scope.showMovies = false;
+	$scope.showServerError = false;
+	$scope.datas = [];
 	$scope.tmpClass = [];
-	$scope.getFilms=function(){$http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
+	$scope.getFilms = function() {
+
+    $http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
    	function successCallback(response) {
-   		if(response.data.Response=="False")
+   		if(response.data.Response == "False")
    		{
-   			$scope.showMovies=false;
-   			$scope.showServerError=true;
+   			$scope.showMovies = false;
+   			$scope.showServerError = true;
     		return;
     	}
-   		$scope.showMovies=true;
-   		$scope.showServerError=false;
-   		$scope.datas=response.data.Search;
-	}, function errorCallback() {
-    	$scope.showMovies=false;
-    	$scope.showServerError=true;
-	});
-=======
-	$scope.getFilms=function(){
-		$http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
-		function successCallback(response) {
-			if(response.data.Response=="False")
-			{
-				$scope.showMovies=false;
-				$scope.showServerError=true;
-				return;
-			}
-			$scope.showMovies=true;
-			$scope.showServerError=false;
-			$scope.datas=response.data.Search;
-		}, function errorCallback() {
-			$scope.showMovies=false;
-			$scope.showServerError=true;
-		});
->>>>>>> origin/favorites
+   		$scope.showMovies = true;
+   		$scope.showServerError = false;
+   		$scope.datas = response.data.Search;
+	  }, function errorCallback() {
+    	$scope.showMovies = false;
+    	$scope.showServerError = true;
+	  });
 	};
+
 	$scope.getFilms();
 
 	$scope.toFlip = function (index) {
@@ -57,4 +41,5 @@ myApp.controller('newMoviesController', function ($scope, $http) {
 			$scope.tmpClass[index] = "";
 		}
 	};
+
 });
