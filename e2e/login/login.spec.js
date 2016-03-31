@@ -1,6 +1,6 @@
 describe("login tests", function(){
 	beforeEach(function(){
-		browser.manage().deleteAllCookies();
+		browser.executeScript('window.localStorage.clear();');
 		browser.get("#/login");
 	});
 	//missing httpbackend

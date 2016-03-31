@@ -8,10 +8,11 @@
  * Controller of the tp1App
  */
 var myApp=angular.module('webApp');
-myApp.controller('favoritesController', function ($scope, $http, FavoritesService) {
+myApp.controller('favoritesController', function ($scope, $http, FavoritesService, ConnectionService) {
 	$scope.datas=[];
 	$scope.showServerError=false;
 	$scope.showUnauthorizedError=false;
+	$scope.userConnected=ConnectionService.getUser().userConnected;
 	$scope.getFilms=function(){
 		FavoritesService.getAll().query({}, function(responce){
 			$scope.datas=[];

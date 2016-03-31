@@ -15,35 +15,68 @@ describe('Controller: favoritesController', function () {
   	httpBackend=$httpBackend;
   	timeout=$timeout;
     scope = $rootScope.$new();
+    localStorage.clear();
     favoritesController = $controller('favoritesController', {
       $scope: scope
       // place here mocked dependencies
     });
-    //httpBackend.verifyNoOutstandingRequest();
   }));
 
   it('should initialize default values', function () {
-		/*expect(scope.datas).toBe([]);
+		//expect(scope.datas.length).toBe(0);
 		expect(scope.showServerError).toBe(false);
-		expect(scope.showUnauthorizedError).toBe(false);*/
+		expect(scope.showUnauthorizedError).toBe(false);
   });
-
-  it('should show the right error', function(){
-  	/*httpBackend.when("GET", "https://omdbapi.com/?s=the&type=movie&y=2016").respond({});
-  	scope.getFilms();
-  	timeout.flush(function(){
-  	expect(scope.showMovies).toBe(false);
-	expect(scope.showServerError).toBe(true);},
-	6000);*/
-  });
-
-  it('should not display selected when movie is not fav', function(){
-  	/*httpBackend.when("GET", "https://omdbapi.com/?s=the&type=movie&y=2016").respond({"Search":[{"Title":"The Shannara Chronicles","Year":"2016–","imdbID":"tt1051220","Type":"series","Poster":"http://ia.media-imdb.com/images/M/MV5BMTkxNjEwOTY4M15BMl5BanBnXkFtZTgwNTA2ODk0NzE@._V1_SX300.jpg"},{"Title":"The 5th Wave","Year":"2016","imdbID":"tt2304933","Type":"movie","Poster":"http://ia.media-imdb.com/images/M/MV5BMjQwOTc0Mzg3Nl5BMl5BanBnXkFtZTgwOTg3NjI2NzE@._V1_SX300.jpg"},{"Title":"Shadowhunters: The Mortal Instruments","Year":"2016–","imdbID":"tt4145054","Type":"series","Poster":"http://ia.media-imdb.com/images/M/MV5BMTAxOTAxMDMxMTZeQTJeQWpwZ15BbWU4MDUzOTA4NTcx._V1_SX300.jpg"},{"Title":"Shadowhunters: The Mortal Instruments","Year":"2016–","imdbID":"tt4565946","Type":"series","Poster":"http://ia.media-imdb.com/images/M/MV5BMTAxOTAxMDMxMTZeQTJeQWpwZ15BbWU4MDUzOTA4NTcx._V1_SX300.jpg"},{"Title":"13 Hours: The Secret Soldiers of Benghazi","Year":"2016","imdbID":"tt4172430","Type":"movie","Poster":"http://ia.media-imdb.com/images/M/MV5BMjU3OTQ5NDc3Ml5BMl5BanBnXkFtZTgwOTEwNTkxNzE@._V1_SX300.jpg"},{"Title":"The Finest Hours","Year":"2016","imdbID":"tt2025690","Type":"movie","Poster":"http://ia.media-imdb.com/images/M/MV5BNTY1MDU1NzYzN15BMl5BanBnXkFtZTgwOTA0MDQyNzE@._V1_SX300.jpg"},{"Title":"The Forest","Year":"2016","imdbID":"tt3387542","Type":"movie","Poster":"http://ia.media-imdb.com/images/M/MV5BMjAwMzQzNTc5OV5BMl5BanBnXkFtZTgwNDgyMTU2NzE@._V1_SX300.jpg"},{"Title":"Blue Mountain State: The Rise of Thadland","Year":"2016","imdbID":"tt3748440","Type":"movie","Poster":"http://ia.media-imdb.com/images/M/MV5BMTYyODE5MTUwNV5BMl5BanBnXkFtZTgwMjk2MjM4NzE@._V1_SX300.jpg"},{"Title":"The Boy","Year":"2016","imdbID":"tt3882082","Type":"movie","Poster":"http://ia.media-imdb.com/images/M/MV5BMTc1MjcxNzcwMV5BMl5BanBnXkFtZTgwMTE0NTE2NzE@._V1_SX300.jpg"},{"Title":"The Veil","Year":"2016","imdbID":"tt3533916","Type":"movie","Poster":"http://ia.media-imdb.com/images/M/MV5BMTQ1NDY4MzkxMl5BMl5BanBnXkFtZTgwODE1MzY3NzE@._V1_SX300.jpg"}],"totalResults":"4240","Response":"True"});
-  	httpBackend.expectGET("https://omdbapi.com/?s=the&type=movie&y=2016");
-	scope.getFilms();
-	httpBackend.flush();
-	expect(scope.showMovies).toBe(true);
-	expect(scope.showServerError).toBe(false);*/
-  });
-
+  
+	it('should call right apis on getting', function () {
+		httpBackend.when('GET', "https://crispesh.herokuapp.com/api/favs/me").respond([{"id":207,"movie_id":"tt2106514","user_id":169,"status":0,"created_at":"2016-03-30T05:33:13+0000","updated_at":"2016-03-30T05:33:13+0000"}]);
+		httpBackend.expectGET("https://crispesh.herokuapp.com/api/favs/me");
+		httpBackend.when('GET', "https://omdbapi.com/?i=tt2106514").respond({"Title":"Yang men nu jiang zhi jun ling ru shan","Year":"2011","Rated":"N/A","Released":"18 Nov 2011","Runtime":"107 min","Genre":"Action","Director":"Frankie Chan","Writer":"N/A","Actors":"Cecilia Cheung, Xiaoqing Liu, Richie Jen, Pei-Pei Cheng","Plot":"In early 11th century China, the Song Dynasty is being invaded by armies of the rival state Western Xia. Yang, the last of a long line of Song generals, is killed and his widowed wife Mu ...","Language":"Chinese","Country":"China","Awards":"N/A","Poster":"http://ia.media-imdb.com/images/M/MV5BMTkzMDU0OTY1OF5BMl5BanBnXkFtZTgwMzQ5NjI2MDE@._V1_SX300.jpg","Metascore":"N/A","imdbRating":"4.4","imdbVotes":"505","imdbID":"tt2106514","Type":"movie","Response":"True"});
+		httpBackend.expectGET("https://omdbapi.com/?i=tt2106514");
+		scope.getFilms();
+		httpBackend.flush();
+	});
+	
+	it('should call right apis on deletion', function () {
+		httpBackend.when('GET', "https://crispesh.herokuapp.com/api/favs/me").respond([{"id":207,"movie_id":"tt2106514","user_id":169,"status":0,"created_at":"2016-03-30T05:33:13+0000","updated_at":"2016-03-30T05:33:13+0000"}]);
+		httpBackend.expectGET("https://crispesh.herokuapp.com/api/favs/me");
+		httpBackend.when('GET', "https://omdbapi.com/?i=tt2106514").respond({"Title":"Yang men nu jiang zhi jun ling ru shan","Year":"2011","Rated":"N/A","Released":"18 Nov 2011","Runtime":"107 min","Genre":"Action","Director":"Frankie Chan","Writer":"N/A","Actors":"Cecilia Cheung, Xiaoqing Liu, Richie Jen, Pei-Pei Cheng","Plot":"In early 11th century China, the Song Dynasty is being invaded by armies of the rival state Western Xia. Yang, the last of a long line of Song generals, is killed and his widowed wife Mu ...","Language":"Chinese","Country":"China","Awards":"N/A","Poster":"http://ia.media-imdb.com/images/M/MV5BMTkzMDU0OTY1OF5BMl5BanBnXkFtZTgwMzQ5NjI2MDE@._V1_SX300.jpg","Metascore":"N/A","imdbRating":"4.4","imdbVotes":"505","imdbID":"tt2106514","Type":"movie","Response":"True"});
+		httpBackend.expectGET("https://omdbapi.com/?i=tt2106514");
+		scope.getFilms();
+		httpBackend.flush();
+		httpBackend.when('DELETE', "https://crispesh.herokuapp.com/api/favs/207").respond({});
+		httpBackend.expectDELETE("https://crispesh.herokuapp.com/api/favs/207");
+		scope.addFavorite(0);
+		httpBackend.flush();
+		//expect(scope.datas.length).toBe(0);
+	});
+	
+	it('should call right apis on addSelected to 1', function () {
+		httpBackend.when('GET', "https://crispesh.herokuapp.com/api/favs/me").respond([{"id":207,"movie_id":"tt2106514","user_id":169,"status":0,"created_at":"2016-03-30T05:33:13+0000","updated_at":"2016-03-30T05:33:13+0000"}]);
+		httpBackend.expectGET("https://crispesh.herokuapp.com/api/favs/me");
+		httpBackend.when('GET', "https://omdbapi.com/?i=tt2106514").respond({"Title":"Yang men nu jiang zhi jun ling ru shan","Year":"2011","Rated":"N/A","Released":"18 Nov 2011","Runtime":"107 min","Genre":"Action","Director":"Frankie Chan","Writer":"N/A","Actors":"Cecilia Cheung, Xiaoqing Liu, Richie Jen, Pei-Pei Cheng","Plot":"In early 11th century China, the Song Dynasty is being invaded by armies of the rival state Western Xia. Yang, the last of a long line of Song generals, is killed and his widowed wife Mu ...","Language":"Chinese","Country":"China","Awards":"N/A","Poster":"http://ia.media-imdb.com/images/M/MV5BMTkzMDU0OTY1OF5BMl5BanBnXkFtZTgwMzQ5NjI2MDE@._V1_SX300.jpg","Metascore":"N/A","imdbRating":"4.4","imdbVotes":"505","imdbID":"tt2106514","Type":"movie","Response":"True"});
+		httpBackend.expectGET("https://omdbapi.com/?i=tt2106514");
+		scope.getFilms();
+		httpBackend.flush();
+		httpBackend.when('PUT', "https://crispesh.herokuapp.com/api/favs/207?movie_id=tt2106514&status=0").respond({});
+		httpBackend.expectPUT("https://crispesh.herokuapp.com/api/favs/207?movie_id=tt2106514&status=0");
+		scope.addSelected(0);
+		httpBackend.flush();
+		expect(scope.datas[0].isSelected).toBeFalsy();
+	});
+	
+	it('should call right apis on addSelected to 1', function () {
+		httpBackend.when('GET', "https://crispesh.herokuapp.com/api/favs/me").respond([{"id":207,"movie_id":"tt2106514","user_id":169,"status":1,"created_at":"2016-03-30T05:33:13+0000","updated_at":"2016-03-30T05:33:13+0000"}]);
+		httpBackend.expectGET("https://crispesh.herokuapp.com/api/favs/me");
+		httpBackend.when('GET', "https://omdbapi.com/?i=tt2106514").respond({"Title":"Yang men nu jiang zhi jun ling ru shan","Year":"2011","Rated":"N/A","Released":"18 Nov 2011","Runtime":"107 min","Genre":"Action","Director":"Frankie Chan","Writer":"N/A","Actors":"Cecilia Cheung, Xiaoqing Liu, Richie Jen, Pei-Pei Cheng","Plot":"In early 11th century China, the Song Dynasty is being invaded by armies of the rival state Western Xia. Yang, the last of a long line of Song generals, is killed and his widowed wife Mu ...","Language":"Chinese","Country":"China","Awards":"N/A","Poster":"http://ia.media-imdb.com/images/M/MV5BMTkzMDU0OTY1OF5BMl5BanBnXkFtZTgwMzQ5NjI2MDE@._V1_SX300.jpg","Metascore":"N/A","imdbRating":"4.4","imdbVotes":"505","imdbID":"tt2106514","Type":"movie","Response":"True"});
+		httpBackend.expectGET("https://omdbapi.com/?i=tt2106514");
+		scope.getFilms();
+		httpBackend.flush();
+		httpBackend.when('PUT', "https://crispesh.herokuapp.com/api/favs/207?movie_id=tt2106514&status=1").respond({});
+		httpBackend.expectPUT("https://crispesh.herokuapp.com/api/favs/207?movie_id=tt2106514&status=1");
+		scope.addSelected(0);
+		httpBackend.flush();
+		expect(scope.datas[0].isSelected).toBeTruthy();
+	});
+  
 });
