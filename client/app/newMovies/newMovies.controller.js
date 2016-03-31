@@ -8,11 +8,12 @@
  * Controller of the tp1App
  */
 var myApp=angular.module('webApp');
-myApp.controller('newMoviesController', function ($scope, $http) {
+myApp.controller('newMoviesController', function ($scope, $http, comment) {
 	$scope.showMovies = false;
 	$scope.showServerError = false;
 	$scope.datas = [];
-	$scope.tmpClass = [];
+  $scope.comments = [];
+
 	$scope.getFilms = function() {
 
     $http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
@@ -34,12 +35,11 @@ myApp.controller('newMoviesController', function ($scope, $http) {
 
 	$scope.getFilms();
 
-	$scope.toFlip = function (index) {
-		if($scope.tmpClass[index] == undefined || $scope.tmpClass[index] == "") {
-			$scope.tmpClass[index] = " flipped";
-		} else {
-			$scope.tmpClass[index] = "";
-		}
-	};
+  $scope.getFilmsComments = function() {
+    $scope.comments = comment.query();
+    console.log($scope.comments);
+  }
+
+  $scope.getFilmsComments();
 
 });
