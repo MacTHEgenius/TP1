@@ -8,13 +8,14 @@
  * Controller of the tp1App
  */
 var myApp=angular.module('webApp');
-myApp.controller('searchController', function ($scope, $http, FavoritesService) {
+myApp.controller('searchController', function ($scope, $http, FavoritesService, ConnectionService) {
 	$scope.showMovies=false;
 	$scope.showEmptyError=false;
 	$scope.showServerError=false;
 	$scope.showNoResultError=false;
 	$scope.totalResults=0;
 	$scope.datas=[];
+	$scope.userConnected=ConnectionService.getUser().userConnected;
 	$scope.fillSelected=function(){
 		FavoritesService.getAll().query({}, function(responce){
 			for(var apiId in responce)
@@ -65,7 +66,10 @@ myApp.controller('searchController', function ($scope, $http, FavoritesService) 
    			$scope.showNoResultError=false;
    			$scope.totalResults=response.data.totalResults;
    			$scope.datas=response.data.Search;
-   			$scope.fillSelected();
+   			if(ConnectionService.getUser().userConnected==true)
+   			{
+				$scope.fillSelected();
+			}
 		}, function errorCallback() {
      		$scope.showServerError=true;
      		$scope.showMovies=false;
