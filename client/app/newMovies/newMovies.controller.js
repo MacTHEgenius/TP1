@@ -96,9 +96,10 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
   };
 
   $scope.modifyComment = function(filmIndex, commentIndex) {
+    console.log($scope.comments);
 
-    var aComment = comment.get({id: $scope.comments[filmIndex][commentIndex].id}, function() {
-      aComment.body = $scope.comments[filmIndex][commentIndex].body;
+    var aComment = comment.get({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].id}, function() {
+      aComment.body = $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].body;
       aComment.$update();
     });
 
