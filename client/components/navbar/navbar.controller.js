@@ -15,7 +15,15 @@ angular.module('webApp')
 		},{
 			'title': 'Recherche',
 			'link': '/search'
-		},{
+		}];
+		if(ConnectionService.getUser().userConnected)
+		{
+			$scope.menu.push({
+			'title': 'Favoris',
+			'link': '/favorites'
+			});
+		}
+		$scope.menu.push({
 			'title': 'Inscription',
 			'link': '/inscription'
 		},{
@@ -24,7 +32,7 @@ angular.module('webApp')
 		},{
 			'title': ConnectionService.getUser().userEmail,
 			'link': '/login'
-		}];
+		});
 	}
 	$scope.updateMenu();
     $scope.isCollapsed = true;

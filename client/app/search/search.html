@@ -8,7 +8,7 @@
 			<div class="col-xs-6 col-xs-offset-3 input-group">
 				<input class="form-control" ng-model="searchM" placeholder="Entrer un titre..." type="text" focus-me="true"/>
 				<div class="input-group-btn">
-					<button id="submitButtonId" class="btn btn-default" type="submit" ng-click="submit()"><span class="glyphicon glyphicon-search"></span></button>
+					<button id="submitButtonId" class="btn btn-default" type="submit" ng-click="submit()">&#128270</button>
 				</div>
 			</div>
 			<span class="col-xs-9 col-xs-offset-3" id="emptyErrorId" ng-show="showEmptyError" style="color:red">Vous devez entrer au moins deux lettre.</span>
@@ -20,15 +20,6 @@
 	<span id="noResultErrorId" ng-show="showNoResultError" style="color:red">Aucun résultat pour la requête spécifiée.</span>
 	<div ng-show="showMovies">
 		<h2 style="text-align:center">Nombre de films : {{totalResults}}</h2>
-		<center>
-			<div class="col-xs-6" ng-repeat="data in datas">
-				<div class="tile blue">
-					<h3>{{data.Title}}</h5>
-					<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
-					<span ng-show="data.Poster=='N/A'"><img ng-src="movie-placeholder.jpg" /></span>
-					<p>{{data.Year}}</p>
-				</div>
-			</div>
-		</center>
+		<ng-include src="'components/favorites/favorites.tiles.html'"></ng-include>
 	</div>
 </div>
