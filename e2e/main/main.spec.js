@@ -3,7 +3,7 @@
 describe("index page e2e tests", function(){
 
 	beforeEach(function(){
-		browser.manage().deleteAllCookies();
+		browser.executeScript('window.localStorage.clear();');
 		browser.get("/");
 	});
 	

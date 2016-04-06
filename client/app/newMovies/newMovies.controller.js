@@ -8,25 +8,102 @@
  * Controller of the tp1App
  */
 var myApp=angular.module('webApp');
-myApp.controller('newMoviesController', function ($scope, $http) {
-	$scope.showMovies=false;
-	$scope.showServerError=false;
-	$scope.datas=[];
-	$scope.getFilms=function(){$http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
+myApp.controller('newMoviesController', function ($scope, $http, comment, ConnectionService) {
+	$scope.showMovies = false;
+	$scope.showServerError = false;
+	$scope.datas = [];
+
+  $scope.comments = [];
+  $scope.showComments = [];
+  $scope.showEditComment = [];
+  $scope.newComments = [];
+  $scope.myEmail = ConnectionService.getUser().userEmail;
+
+	$scope.getFilms = function() {
+
+    $http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
    	function successCallback(response) {
-   		if(response.data.Response=="False")
+
+   		if(response.data.Response == "False")
    		{
-   			$scope.showMovies=false;
-   			$scope.showServerError=true;
+   			$scope.showMovies = false;
+   			$scope.showServerError = true;
     		return;
     	}
-   		$scope.showMovies=true;
-   		$scope.showServerError=false;
-   		$scope.datas=response.data.Search;
-	}, function errorCallback() {
-    	$scope.showMovies=false;
-    	$scope.showServerError=true;
-	});
+   		$scope.showMovies = true;
+   		$scope.showServerError = false;
+   		$scope.datas = response.data.Search;
+   		if(ConnectionService.getUser().userConnected)
+   		{
+			$scope.getFilmsComments();
+		}
+
+	  }, function errorCallback() {
+
+    	$scope.showMovies = false;
+    	$scope.showServerError = true;
+
+	  });
 	};
+
 	$scope.getFilms();
+
+  $scope.getFilmsComments = function() {
+    $scope.comments = [];
+    for (var i = 0; i < $scope.datas.length ; i++) {
+      $scope.comments.push(comment.query({movie_id: $scope.datas[i].imdbID}));
+    }
+  };
+
+  $scope.getSpecificFilmComments = function(index, id) {
+    $scope.comments[index].push(comment.get({id: id}));
+  };
+
+  $scope.showFilmComments = function(index) {
+    $scope.showComments[index] = true;
+  };
+
+  $scope.hideFilmComments = function(index) {
+    $scope.showComments[index] = false;
+  };
+
+  $scope.addComment = function(index) {
+    var aComment = {
+      'body': $scope.newComments[index],
+      'movie_id': $scope.datas[index].imdbID,
+      'status': 1
+    };
+    comment.save(aComment, function(success) {
+      $scope.getSpecificFilmComments(index, success.id);
+      $scope.newComments[index] = '';
+    });
+  };
+
+  $scope.deleteComment = function(filmIndex, commentIndex) {
+    comment.delete({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].id});
+    $scope.comments[filmIndex].splice($scope.comments[filmIndex].length - commentIndex - 1, 1);
+    if($scope.showEditComment[filmIndex] != undefined) {
+      $scope.showEditComment[filmIndex].splice(commentIndex, 1);
+    }
+  };
+
+  $scope.showEditCommentSection = function(filmIndex, commentIndex) {
+
+    if($scope.showEditComment[filmIndex] == undefined) {
+      $scope.showEditComment[filmIndex] = [];
+      $scope.showEditComment[filmIndex][commentIndex] = false;
+    }
+    $scope.showEditComment[filmIndex][commentIndex] = !$scope.showEditComment[filmIndex][commentIndex];
+
+  };
+
+  $scope.modifyComment = function(filmIndex, commentIndex) {
+
+    var aComment = comment.get({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].id}, function() {
+      aComment.body = $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].body;
+      aComment.$update();
+    });
+
+  };
+
 });

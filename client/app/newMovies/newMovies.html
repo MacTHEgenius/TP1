@@ -1,9 +1,11 @@
 <link rel="stylesheet" href="newMovies.css">
 <div ng-controller="newMoviesController">
-	<span id="serverErrorId" ng-show="showServerError" style="color:red">
-		Une erreur est survenue pendant l'appel du serveur.
-		<a onclick='location.reload(true); return false;'><button>Actualiser</button></a>
-	</span>
+
+	<div id="serverErrorId" class="serverError" ng-show="showServerError">
+		Une erreur est survenue pendant l'appel du serveur.<br/><br/>
+    <button class="btn btn-default" onclick="location.reload(true); return false;">Actualiser</button><br/><br/>
+	</div>
+
 	<div ng-show="showMovies">
 		<div class="jumbotron">
 			<h1>Films de l'année 2016</h1>
@@ -11,13 +13,68 @@
 		<div class="row">
 			<center>
 				<div class="col-xs-6" ng-repeat="data in datas | limitTo:6">
-					<div class="">
-						<div class="tile blue">
-							<span ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"/></span>
-							<span ng-show="data.Poster=='N/A'"><img ng-src="movie-placeholder.jpg" /></span>
-							<h3>{{data.Title}}</h3>
-						</div>
-					</div>
+
+
+            <!--<span class="filter">-->
+              <!--<span class="glyphicon glyphicon-comment"></span>-->
+              <!--<div class="label-text">Afficher les commentaires</div>-->
+            <!--</span>-->
+
+          <div class="">
+            <span class="filter" ng-if="data.Poster!='N/A'">
+              <img ng-src="{{data.Poster}}">
+              <!--<div class="glyphicon2 glyphicon-comment"></div>-->
+              <!--<div class="label-text">Afficher les commentaires</div>-->
+            </span>
+
+            <span class="filter" ng-show="data.Poster=='N/A'"><img class="filter" ng-src="movie-placeholder.jpg"></span>
+            <!--<h3>{{data.Title}}</h3>-->
+          </div>
+
+          <br/>
+          <button class="btn btn-default" ng-click="showFilmComments($index)" ng-hide="showComments[$index]">Afficher</button>
+
+          <div ng-show="showComments[$index]">
+
+            <button class="btn btn-default" ng-click="hideFilmComments($index)">Masquer</button>
+
+            <form name="commentForm">
+              <div class="form-group">
+                <h2>Leave your comment !</h2>
+              </div>
+              <div class="form-group">
+                <textarea type="text" class="form-control" placeholder="Your message..." ng-model="newComments[$index]"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" ng-click="addComment($index)">Submit</button>
+            </form>
+
+            <hr>
+
+            <div ng-repeat="comment in comments[$index] | orderBy: '-date_created'">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <b>{{comment.user.username}}</b> at {{comment.date_created}}
+                  <div class="pull-right" ng-show="myEmail == comment.user.username">
+                    <span class="glyphicon glyphicon-pencil" ng-click="showEditCommentSection($parent.$index, $index)"></span>
+                    <span class="glyphicon glyphicon-remove" ng-click="deleteComment($parent.$index, $index)"></span>
+                  </div>
+                </div>
+                <div class="panel-body" ng-hide="showEditComment[$parent.$index][$index]">
+                  {{comment.body}}
+                </div>
+                <div class="panel-body" ng-show="showEditComment[$parent.$index][$index]">
+                  <form name="editCommentForm">
+                    <div class="form-group">
+                      <textarea type="text" class="form-control" ng-model="comment.body"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="modifyComment($parent.$index, $index); showEditCommentSection($parent.$index, $index)">Finish</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
 				</div>
 			</center>
 		</div>
