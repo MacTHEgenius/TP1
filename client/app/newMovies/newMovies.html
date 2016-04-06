@@ -56,7 +56,7 @@
                 <div class="panel-heading">
                   <b>{{comment.user.username}}</b> at {{comment.date_created}}
                   <div class="pull-right" ng-show="myEmail == comment.user.username">
-                    <span class="glyphicon glyphicon-pencil" ng-click="showEditCommentSection($parent.$index, $index)"></span><!-- Changer les glyphicon pour des &#1234 pour heroku -->
+                    <span class="glyphicon glyphicon-pencil" ng-click="showEditCommentSection($parent.$index, $index)"></span><!-- Changer les glyphicon pour des &#9999, &#10005~ pour heroku -->
                     <span class="glyphicon glyphicon-remove" ng-click="deleteComment($parent.$index, $index)"></span>
                   </div>
                 </div>
