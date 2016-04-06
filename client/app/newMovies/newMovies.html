@@ -21,9 +21,10 @@
             <!--</span>-->
 
           <div class="">
-            <span class="filter" ng-if="data.Poster!='N/A'">
-              <img ng-src="{{data.Poster}}">
-              <!--<div class="glyphicon2 glyphicon-comment"></div>-->
+            <span  ng-if="data.Poster!='N/A'">
+              <img class="filter" ng-src="{{data.Poster}}">
+              </span>
+              <!---->
               <!--<div class="label-text">Afficher les commentaires</div>-->
             </span>
 
@@ -32,7 +33,7 @@
           </div>
 
           <br/>
-          <button class="btn btn-default" ng-click="showFilmComments($index)" ng-hide="showComments[$index]">Afficher</button>
+          <button class="btn btn-default" ng-click="showFilmComments($index)" ng-hide="showComments[$index] || !isConnected()">Afficher</button>
 
           <div ng-show="showComments[$index]">
 
@@ -40,12 +41,12 @@
 
             <form name="commentForm">
               <div class="form-group">
-                <h2>Leave your comment !</h2>
+                <h2>Laissez votre commentaire !</h2>
               </div>
               <div class="form-group">
                 <textarea type="text" class="form-control" placeholder="Your message..." ng-model="newComments[$index]"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary" ng-click="addComment($index)">Submit</button>
+              <button type="submit" class="btn btn-primary" ng-click="addComment($index)">Envoyer</button>
             </form>
 
             <hr>
@@ -55,7 +56,7 @@
                 <div class="panel-heading">
                   <b>{{comment.user.username}}</b> at {{comment.date_created}}
                   <div class="pull-right" ng-show="myEmail == comment.user.username">
-                    <span class="glyphicon glyphicon-pencil" ng-click="showEditCommentSection($parent.$index, $index)"></span>
+                    <span class="glyphicon glyphicon-pencil" ng-click="showEditCommentSection($parent.$index, $index)"></span><!-- Changer les glyphicon pour des &#1234 pour heroku -->
                     <span class="glyphicon glyphicon-remove" ng-click="deleteComment($parent.$index, $index)"></span>
                   </div>
                 </div>

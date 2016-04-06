@@ -20,7 +20,8 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
   $scope.myEmail = ConnectionService.getUser().userEmail;
 
 	$scope.getFilms = function() {
-
+	$scope.showMovies = false;
+	$scope.showServerError = false;
     $http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
    	function successCallback(response) {
 
@@ -45,6 +46,10 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
 
 	  });
 	};
+	
+	$scope.isConnected = function(){
+		return ConnectionService.getUser().userConnected;
+	}
 
 	$scope.getFilms();
 
