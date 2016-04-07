@@ -14,30 +14,16 @@
 			<center>
 				<div class="col-xs-6" ng-repeat="data in datas | limitTo:6">
 
-
-            <!--<span class="filter">-->
-              <!--<span class="glyphicon glyphicon-comment"></span>-->
-              <!--<div class="label-text">Afficher les commentaires</div>-->
-            <!--</span>-->
-
-          <div class="">
-            <span  ng-if="data.Poster!='N/A'">
-              <img class="filter" ng-src="{{data.Poster}}">
-              </span>
-              <!---->
-              <!--<div class="label-text">Afficher les commentaires</div>-->
-            </span>
-
-            <span class="filter" ng-show="data.Poster=='N/A'"><img class="filter" ng-src="movie-placeholder.jpg"></span>
-            <!--<h3>{{data.Title}}</h3>-->
+          <div href="#" class="film">
+            <h3>{{data.Title}}</h3>
+            <div ng-if="data.Poster!='N/A'"><img ng-src="{{data.Poster}}"></div>
+            <div ng-show="data.Poster=='N/A'"><img class="filter" ng-src="movie-placeholder.jpg"  ng-click="showFilmComments($index)"></div>
           </div>
-
-          <br/>
-          <button class="btn btn-default" ng-click="showFilmComments($index)" ng-hide="showComments[$index] || !isConnected()">Afficher</button>
+          <button class="comment btn btn-default" ng-click="showFilmComments($index)" ng-hide="showComments[$index] || !isConnected()">Commentaires</button>
 
           <div ng-show="showComments[$index]">
 
-            <button class="btn btn-default" ng-click="hideFilmComments($index)">Masquer</button>
+            <button class="comment2 btn btn-default" ng-click="hideFilmComments($index)">Masquer</button>
 
             <form name="commentForm">
               <div class="form-group">
@@ -55,10 +41,6 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <b>{{comment.user.username}}</b> at {{comment.date_created}}
-                  <div class="pull-right" ng-show="myEmail == comment.user.username">
-                    <span class="glyphicon glyphicon-pencil" ng-click="showEditCommentSection($parent.$index, $index)"></span><!-- Changer les glyphicon pour des &#9999, &#10005~ pour heroku -->
-                    <span class="glyphicon glyphicon-remove" ng-click="deleteComment($parent.$index, $index)"></span>
-                  </div>
                 </div>
                 <div class="panel-body" ng-hide="showEditComment[$parent.$index][$index]">
                   {{comment.body}}
@@ -70,6 +52,10 @@
                     </div>
                     <button type="submit" class="btn btn-primary" ng-click="modifyComment($parent.$index, $index); showEditCommentSection($parent.$index, $index)">Finish</button>
                   </form>
+                </div>
+                <div class="panel-footer" ng-show="myEmail == comment.user.username">
+                  <span class="btn btn-default" ng-click="showEditCommentSection($parent.$index, $index)" style="font-size: large">✎</span>
+                  <span class="btn btn-default" ng-click="deleteComment($parent.$index, $index)" style="font-size: large">⊗</span><!-- Changer les glyphicon pour des &#9999, &#10005~ pour heroku -->
                 </div>
               </div>
             </div>
