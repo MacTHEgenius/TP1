@@ -46,7 +46,7 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
 
 	  });
 	};
-	
+
 	$scope.isConnected = function(){
 		return ConnectionService.getUser().userConnected;
 	}
@@ -85,8 +85,8 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
   };
 
   $scope.deleteComment = function(filmIndex, commentIndex) {
-    comment.delete({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].id});
-    $scope.comments[filmIndex].splice($scope.comments[filmIndex].length - commentIndex - 1, 1);
+    comment.delete({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 2].id});
+    $scope.comments[filmIndex].splice($scope.comments[filmIndex].length - commentIndex - 2, 1);
     if($scope.showEditComment[filmIndex] != undefined) {
       $scope.showEditComment[filmIndex].splice(commentIndex, 1);
     }
