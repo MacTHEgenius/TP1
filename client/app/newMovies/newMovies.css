@@ -14,11 +14,27 @@ img {
   text-align: center;
   position: relative;
   z-index: 2;
-  -webkit-transition: all .6s ease;
+  /*filter: brightness(1);
+  -webkit-transition: all .6s ease;*/
 }
 
 .filter:hover {
+
   filter: brightness(0.4) /*blur(10px)*/;
+}
+
+.reversedFilter{
+  width:50%;
+  height: auto;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  display: none;
+}
+
+.reversedFilter:hover {
+  display: block /*blur(10px)*/;
 }
 
 .glyphicon2 {

@@ -20,7 +20,8 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
   $scope.myEmail = ConnectionService.getUser().userEmail;
 
 	$scope.getFilms = function() {
-
+	$scope.showMovies = false;
+	$scope.showServerError = false;
     $http.get('https://omdbapi.com/', {params : {s : 'the', y : 2016, type: 'movie'}, timeout : 5000}).then(
    	function successCallback(response) {
 
@@ -33,7 +34,10 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
    		$scope.showMovies = true;
    		$scope.showServerError = false;
    		$scope.datas = response.data.Search;
-      $scope.getFilmsComments();
+   		if(ConnectionService.getUser().userConnected)
+   		{
+			$scope.getFilmsComments();
+		}
 
 	  }, function errorCallback() {
 
@@ -42,12 +46,16 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
 
 	  });
 	};
+	
+	$scope.isConnected = function(){
+		return ConnectionService.getUser().userConnected;
+	}
 
 	$scope.getFilms();
 
   $scope.getFilmsComments = function() {
     $scope.comments = [];
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < $scope.datas.length ; i++) {
       $scope.comments.push(comment.query({movie_id: $scope.datas[i].imdbID}));
     }
   };
@@ -71,15 +79,14 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
       'status': 1
     };
     comment.save(aComment, function(success) {
-      console.log(success);
       $scope.getSpecificFilmComments(index, success.id);
       $scope.newComments[index] = '';
     });
   };
 
   $scope.deleteComment = function(filmIndex, commentIndex) {
-    comment.delete({id: $scope.comments[filmIndex][commentIndex].id});
-    $scope.comments[filmIndex].splice(commentIndex, 1);
+    comment.delete({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].id});
+    $scope.comments[filmIndex].splice($scope.comments[filmIndex].length - commentIndex - 1, 1);
     if($scope.showEditComment[filmIndex] != undefined) {
       $scope.showEditComment[filmIndex].splice(commentIndex, 1);
     }
@@ -96,7 +103,6 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
   };
 
   $scope.modifyComment = function(filmIndex, commentIndex) {
-    console.log($scope.comments);
 
     var aComment = comment.get({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].id}, function() {
       aComment.body = $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].body;

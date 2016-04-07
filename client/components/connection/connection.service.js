@@ -1,6 +1,7 @@
 var myApp = angular.module('webApp');
 myApp.factory('ConnectionService', function($rootScope)
 {
+	//{userJwt: token, userEmail:a@a.a, userConnected:1/0}
 	var clear=function(){
 		var user={userEmail:"Connexion", userConnected:false};
 		if($rootScope.globals===undefined)$rootScope.globals={};

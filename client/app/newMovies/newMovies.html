@@ -25,7 +25,7 @@
           </div>
 
           <br/>
-          <button class="btn btn-default" ng-click="showFilmComments($index)" ng-hide="showComments[$index]">Afficher</button>
+          <button class="btn btn-default" ng-click="showFilmComments($index)" ng-hide="showComments[$index] || !isConnected()">Afficher</button>
 
           <div ng-show="showComments[$index]">
 
@@ -33,12 +33,12 @@
 
             <form name="commentForm">
               <div class="form-group">
-                <h2>Leave your comment !</h2>
+                <h2>Laissez votre commentaire !</h2>
               </div>
               <div class="form-group">
                 <textarea type="text" class="form-control" placeholder="Your message..." ng-model="newComments[$index]"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary" ng-click="addComment($index)">Submit</button>
+              <button type="submit" class="btn btn-primary" ng-click="addComment($index)">Envoyer</button>
             </form>
 
             <hr>
@@ -49,7 +49,7 @@
                   <b>{{comment.user.username}}</b> at {{comment.date_created}}
                   <div class="pull-right" ng-show="myEmail == comment.user.username">
                     <span class="btn btn-default" ng-click="showEditCommentSection($parent.$index, $index)" style="font-size: large">✎</span>
-                    <span class="btn btn-default" ng-click="deleteComment($parent.$index, $index)" style="font-size: large">⊗</span>
+                    <span class="btn btn-default" ng-click="deleteComment($parent.$index, $index)" style="font-size: large">⊗</span><!-- Changer les glyphicon pour des &#9999, &#10005~ pour heroku -->
                   </div>
                 </div>
                 <div class="panel-body" ng-hide="showEditComment[$parent.$index][$index]">
