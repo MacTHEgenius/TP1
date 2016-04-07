@@ -14,21 +14,14 @@
 			<center>
 				<div class="col-xs-6" ng-repeat="data in datas | limitTo:6">
 
-
-            <!--<span class="filter">-->
-              <!--<span class="glyphicon glyphicon-comment"></span>-->
-              <!--<div class="label-text">Afficher les commentaires</div>-->
-            <!--</span>-->
-
           <div class="">
+            <h3>{{data.Title}}</h3>
             <span class="filter" ng-if="data.Poster!='N/A'">
               <img ng-src="{{data.Poster}}">
               <!--<div class="glyphicon2 glyphicon-comment"></div>-->
               <!--<div class="label-text">Afficher les commentaires</div>-->
             </span>
-
             <span class="filter" ng-show="data.Poster=='N/A'"><img class="filter" ng-src="movie-placeholder.jpg"></span>
-            <!--<h3>{{data.Title}}</h3>-->
           </div>
 
           <br/>
@@ -55,8 +48,8 @@
                 <div class="panel-heading">
                   <b>{{comment.user.username}}</b> at {{comment.date_created}}
                   <div class="pull-right" ng-show="myEmail == comment.user.username">
-                    <span class="glyphicon glyphicon-pencil" ng-click="showEditCommentSection($parent.$index, $index)"></span>
-                    <span class="glyphicon glyphicon-remove" ng-click="deleteComment($parent.$index, $index)"></span>
+                    <span class="btn btn-default" ng-click="showEditCommentSection($parent.$index, $index)" style="font-size: large">✎</span>
+                    <span class="btn btn-default" ng-click="deleteComment($parent.$index, $index)" style="font-size: large">⊗</span>
                   </div>
                 </div>
                 <div class="panel-body" ng-hide="showEditComment[$parent.$index][$index]">
