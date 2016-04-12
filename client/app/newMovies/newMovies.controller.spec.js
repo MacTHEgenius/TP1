@@ -97,7 +97,7 @@ describe('Controller: newMoviesController', function () {
 	httpBackend.flush();
 	httpBackend.when("DELETE", "https://crispesh.herokuapp.com/api/comments/455").respond({});
   	httpBackend.expectDELETE("https://crispesh.herokuapp.com/api/comments/455");
-	scope.deleteComment(0, 0);
+	scope.deleteComment(0, {"id":455,"body":"That movei","date_created":"2016-04-06T00:21:55+0000","user":{"id":"153","username":"a@a.a"},"movie_id":"tt2304933","status":1});
 	httpBackend.flush();
 	expect(scope.showMovies).toBe(true);
 	expect(scope.showServerError).toBe(false);
@@ -115,7 +115,7 @@ describe('Controller: newMoviesController', function () {
 	httpBackend.flush();
 	httpBackend.when("DELETE", "https://crispesh.herokuapp.com/api/comments/455").respond({});
   	httpBackend.expectDELETE("https://crispesh.herokuapp.com/api/comments/455");
-	scope.deleteComment(0, 1);
+	scope.deleteComment(0, {"id":455,"body":"That movei","date_created":"2016-04-06T00:21:55+0000","user":{"id":"153","username":"a@a.a"},"movie_id":"tt2304933","status":1});
 	httpBackend.flush();
 	expect(scope.showMovies).toBe(true);
 	expect(scope.showServerError).toBe(false);
@@ -135,7 +135,7 @@ describe('Controller: newMoviesController', function () {
   	httpBackend.expectGET("https://crispesh.herokuapp.com/api/comments/490");
 	httpBackend.when("PUT", "https://crispesh.herokuapp.com/api/comments/490").respond({"id":490,"body":"I'm finaly free!","date_created":"2016-04-06T03:01:15+0000","user":{"id":"153","username":"a@a.a"},"movie_id":"tt2304933","status":1});
   	httpBackend.expectPUT("https://crispesh.herokuapp.com/api/comments/490");
-	scope.modifyComment(0, 0);
+	scope.modifyComment({"id":490,"body":"Kant dirait que c'est mal","date_created":"2016-04-06T02:55:01+0000","user":{"id":"153","username":"a@a.a"},"movie_id":"tt2304933","status":1});
 	httpBackend.flush();
 	expect(scope.showMovies).toBe(true);
 	expect(scope.showServerError).toBe(false);

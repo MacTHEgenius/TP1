@@ -84,11 +84,12 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
     });
   };
 
-  $scope.deleteComment = function(filmIndex, commentIndex) {
-    comment.delete({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 2].id});
-    $scope.comments[filmIndex].splice($scope.comments[filmIndex].length - commentIndex - 2, 1);
+  $scope.deleteComment = function(filmIndex, someComment) {
+    comment.delete({id: someComment.id});
+    var index=$scope.comments[filmIndex].indexOf(someComment);
+    $scope.comments[filmIndex].splice(index, 1);
     if($scope.showEditComment[filmIndex] != undefined) {
-      $scope.showEditComment[filmIndex].splice(commentIndex, 1);
+      $scope.showEditComment[filmIndex].splice(index, 1);
     }
   };
 
@@ -102,10 +103,9 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
 
   };
 
-  $scope.modifyComment = function(filmIndex, commentIndex) {
-
-    var aComment = comment.get({id: $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].id}, function() {
-      aComment.body = $scope.comments[filmIndex][$scope.comments[filmIndex].length - commentIndex - 1].body;
+  $scope.modifyComment = function(someComment) {
+    var aComment = comment.get({id: someComment.id}, function() {
+      aComment.body = someComment.body;
       aComment.$update();
     });
 
