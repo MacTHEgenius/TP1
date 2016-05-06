@@ -7,7 +7,6 @@ angular.module('webApp', [
   'ngRoute',
   'ui.bootstrap',
   'angular-jwt'
-  //angular-jwt fait buger les tests, ainsi que l'intercepteur
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

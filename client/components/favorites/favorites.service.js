@@ -1,7 +1,7 @@
 var myApp = angular.module('webApp');
 myApp.service('FavoritesService', function($resource)
 {
-  var restAPIUrl = 'https://crispesh.herokuapp.com/api';
+  var restAPIUrl = 'http://127.0.0.1:8000/api';
   return {
 	getAll:function(){
 		  return $resource(restAPIUrl + '/favs/me');
