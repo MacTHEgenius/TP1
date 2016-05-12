@@ -1,6 +1,6 @@
 angular.module('webApp').config(['$httpProvider', 'jwtInterceptorProvider', function ($httpProvider, jwtInterceptorProvider)
 {
-    jwtInterceptorProvider.tokenGetter = ['config', 'jwtHelper', function(config, jwtHelper) {
+    jwtInterceptorProvider.tokenGetter = ['config', 'jwtHelper', '$http', 'action', 'ConnectionService', function(config, jwtHelper, $http, action, ConnectionService) {
  
     // Do not use token to get .html templates
     //console.log(config);

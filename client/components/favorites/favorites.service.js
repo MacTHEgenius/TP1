@@ -1,7 +1,9 @@
 var myApp = angular.module('webApp');
-myApp.service('FavoritesService', function($resource)
+myApp.service('FavoritesService', function($resource, action)
 {
   var restAPIUrl = 'http://127.0.0.1:8000/api';
+  console.log("fav service");
+  action.save({body:"Fav sent"});
   return {
 	getAll:function(){
 		  return $resource(restAPIUrl + '/favs/me');
