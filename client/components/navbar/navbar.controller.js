@@ -29,7 +29,12 @@ angular.module('webApp')
 		},{
 			'title': 'Contact',
 			'link': '/contact'
-		},{
+		})
+		if(ConnectionService.getUser().userConnected){
+			$scope.menu.push({'title': 'Actions',
+			'link': '/actions'})
+		}
+		$scope.menu.push({
 			'title': ConnectionService.getUser().userEmail,
 			'link': '/login'
 		});

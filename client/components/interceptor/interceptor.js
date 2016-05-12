@@ -4,7 +4,7 @@ angular.module('webApp').config(['$httpProvider', 'jwtInterceptorProvider', func
  
     // Do not use token to get .html templates
     //console.log(config);
-    if (config.url.indexOf("api/comments") ==-1 && config.url.indexOf("api/favs") ==-1)
+    if (config.url.indexOf("api/comments") ==-1 && config.url.indexOf("api/favs") ==-1 && config.url.indexOf("api/actions") ==-1)
     {
       return null;
     }
@@ -31,7 +31,6 @@ angular.module('webApp').config(['$httpProvider', 'jwtInterceptorProvider', func
       return jwt;
     }
   }];
- 
   $httpProvider.interceptors.push('jwtInterceptor');
  
 }]) ;
