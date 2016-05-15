@@ -8,7 +8,7 @@
  * Controller of the tp1App
  */
 var myApp=angular.module('webApp');
-myApp.controller('loginController', function ($scope, LoginPost, $rootScope, $cookies, ConnectionService) {
+myApp.controller('loginController', function ($scope, LoginPost, $rootScope, $cookies, ConnectionService, action) {
 	$scope.showForm=true;
 	$scope.userConnected=ConnectionService.getUser().userConnected;
 	$scope.serverError=false;
@@ -22,6 +22,7 @@ myApp.controller('loginController', function ($scope, LoginPost, $rootScope, $co
 				$scope.showForm=false;
 				$scope.serverError=false;
 				ConnectionService.setUser({userJwt:responce.token, userEmail:responce.data.username, userConnected:true});
+				action.save({body:"User logged"});
 			}, function(error)
 			{
 				$scope.serverError=true;
@@ -34,8 +35,14 @@ myApp.controller('loginController', function ($scope, LoginPost, $rootScope, $co
 		}
 	}
 	$scope.disconnect=function(){
-		$scope.showForm=true;
-		ConnectionService.clearUser();
-		$scope.userConnected=ConnectionService.getUser().userConnected;
+		action.save({body:"User disconnected"}, function(success){
+			$scope.showForm=true;
+			ConnectionService.clearUser();
+			$scope.userConnected=ConnectionService.getUser().userConnected;
+		}, function(error){
+			$scope.showForm=true;
+			ConnectionService.clearUser();
+			$scope.userConnected=ConnectionService.getUser().userConnected;
+		});
 	}
 });

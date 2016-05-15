@@ -8,7 +8,7 @@
  * Controller of the tp1App
  */
 var myApp=angular.module('webApp');
-myApp.controller('newMoviesController', function ($scope, $http, comment, ConnectionService) {
+myApp.controller('newMoviesController', function ($scope, $http, comment, ConnectionService, action) {
 	$scope.showMovies = false;
 	$scope.showServerError = false;
 	$scope.datas = [];
@@ -78,6 +78,7 @@ myApp.controller('newMoviesController', function ($scope, $http, comment, Connec
       'movie_id': $scope.datas[index].imdbID,
       'status': 1
     };
+    action.save({body:"comment Sent"});
     comment.save(aComment, function(success) {
       $scope.getSpecificFilmComments(index, success.id);
       $scope.newComments[index] = '';
